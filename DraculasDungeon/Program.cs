@@ -9,11 +9,16 @@ namespace DraculasDungeon
     class Program
     {
         public static Player currentPlayer = new Player();
-        
+        public static bool mainLoop = true;
         static void Main(string[] args)
         {
             Start();
             Encounters.FirstEncounter();
+            while (mainLoop)
+            {
+                Encounters.RandomEncounter();
+            }
+
         }
 
         static void Start()

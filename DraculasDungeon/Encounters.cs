@@ -19,7 +19,37 @@ namespace DraculasDungeon
             Console.ReadKey();
             Combat(false, "Prison Guard", 1, 4);
         }
+
+        public static void BasicFightEncounter()
+        {
+            Console.Clear();
+            Console.WriteLine("Progressing through the Labrinth, you stumple upon a hostile creature... prepare yourself!");
+            Console.ReadKey();
+            Combat(true,"",0,0);
+        }
+
+        public static void MiniBossEncounterOne()
+        {
+            Console.Clear();
+            Console.WriteLine("Turning the corner, you find a strange room unique among the maze, filled with books and strange objects. Futher in "+
+                "you find a tall man pouring over a tome. When he notices your prescence, his darkly glowing eyes narrow and snap to you.");
+            Console.ReadKey();
+            Combat(false, "Necromancer", 5, 2);
+        }
         //Encounter Tools
+
+        public static void RandomEncounter()
+        {
+            switch (rand.Next(0, 2))
+            {
+                case 0:
+                    BasicFightEncounter();
+                    break;
+                case 1:
+                    MiniBossEncounterOne();
+                    break;
+            }
+        }
 
         public static void Combat(bool random, string name, int power, int health)
         {
@@ -29,7 +59,9 @@ namespace DraculasDungeon
 
             if(random)
             {
-
+                n = GetName();
+                p = rand.Next(1, 5);
+                h = rand.Next(1, 8);
             }
             else
             {
@@ -52,7 +84,7 @@ namespace DraculasDungeon
                 {
                     //Attack
                     Console.WriteLine("You take an offensive stance. As you make your attack, the "
-                        + n + "attempts a counter");
+                        + n + " attempts a counter");
                     int damage = p - Program.currentPlayer.armorValue;
                     if(damage < 0)
                         damage = 0;
@@ -117,8 +149,60 @@ namespace DraculasDungeon
                     }
                     Console.ReadKey();
                 }
+
+                if(Program.currentPlayer.health <= 0)
+                {
+                    Console.WriteLine("You cannot overcome the " + n + ", it looks down at your broken body, laughing a cruel laugh.");
+                    Console.ReadKey();
+                    System.Environment.Exit(0);
+                }
+
                 Console.ReadKey();
             }
+            int c = rand.Next(10, 50);
+            Console.WriteLine("You stand victories over the defeated " + n + ". You find " + c + " coins on the corpse.");
+            Program.currentPlayer.coins += c;
+            Console.ReadKey();
         }
+
+        public static string GetName()
+        {
+            switch (rand.Next(0,9))
+            {
+                case 0:
+                    return "Skeleton";
+                    break;
+                case 1:
+                    return "Zombie";
+                    break;
+                case 2:
+                    return "Slime";
+                    break;
+                case 3:
+                    return "Spider";
+                    break;
+                case 4:
+                    return "Cave Dweller";
+                    break;
+                case 5:
+                    return "Giant Rat";
+                    break;
+                case 6:
+                    return "Mutated Cockroach";
+                    break;
+                case 7:
+                    return "Goblin";
+                    break;
+                case 8:
+                    return "Orc";
+                    break;
+                case 9:
+                    return "Bear";
+                    break;
+            }
+            return "???";
+        }
+
+
     }
 }
