@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DraculasDungeon
 {
-    class Encounters
+    public class Encounters
     {
         static Random rand = new Random();
         //Encounter Generic
@@ -60,8 +60,8 @@ namespace DraculasDungeon
             if(random)
             {
                 n = GetName();
-                p = rand.Next(1, 5);
-                h = rand.Next(1, 8);
+                p = Program.currentPlayer.GetPower();
+                h = Program.currentPlayer.GetHealth();
             }
             else
             {
@@ -118,9 +118,9 @@ namespace DraculasDungeon
                         Console.ReadKey();
                     } else
                     {
-                        Console.WriteLine("Deciding it would be best to turn and run, you narrowly evade the " + "'s attack and successfully escape" );
+                        Console.WriteLine("Deciding it would be best to turn and run, you narrowly evade the " + n + "'s attack and successfully escape." );
                         Console.ReadKey();
-                        //TODO: go to store
+                        PocketPlane.LoadShop(Program.currentPlayer);
                     }
                     
                 }
@@ -144,7 +144,7 @@ namespace DraculasDungeon
                         int damage = (p/2) - Program.currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
-                        Console.WriteLine("While you were distracted the " + " is able to attack. You lose " + damage + " health.");
+                        Console.WriteLine("While you were distracted the " + n + " is able to attack. You lose " + damage + " health.");
 
                     }
                     Console.ReadKey();
@@ -159,7 +159,7 @@ namespace DraculasDungeon
 
                 Console.ReadKey();
             }
-            int c = rand.Next(10, 50);
+            int c = Program.currentPlayer.GetCoins();
             Console.WriteLine("You stand victories over the defeated " + n + ". You find " + c + " coins on the corpse.");
             Program.currentPlayer.coins += c;
             Console.ReadKey();
