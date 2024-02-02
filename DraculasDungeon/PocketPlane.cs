@@ -32,7 +32,11 @@ namespace DraculasDungeon
                 Console.WriteLine("(P)otions            : $" + potionP);
                 Console.WriteLine("(D)ifficulty Changer : $" + difP);
                 Console.WriteLine("=============================");
-                Console.WriteLine("             (E)xit          ");
+                Console.WriteLine("(E)xit Shop");
+                Console.WriteLine("(Q)uit Game");
+
+
+
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine(p.name + "'s Stats");
@@ -62,6 +66,10 @@ namespace DraculasDungeon
                 else if (input == "d")
                 {
                     TryBuy("dif", difP, p);
+                }
+                else if(input == "q")
+                {
+                    Program.Quit();
                 }
                 else if (input == "e")
                     break;

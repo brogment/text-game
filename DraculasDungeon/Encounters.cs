@@ -8,7 +8,7 @@ namespace DraculasDungeon
 {
     public class Encounters
     {
-        static Random rand = new Random();
+        public static Random rand = new Random();
         //Encounter Generic
         
         //Encounters
