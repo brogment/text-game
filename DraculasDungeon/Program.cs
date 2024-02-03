@@ -173,7 +173,7 @@ namespace DraculasDungeon
         }
 
 
-        public static void Print(string text, int speed = 20)
+        public static void Print(string text, int speed = 10)
         {
             foreach (char c in text)
             {
@@ -182,6 +182,21 @@ namespace DraculasDungeon
             }
             Console.WriteLine();
         }
+
+        public static void ProgressBar(string fillerChar, string backgroundChar, decimal value, int size)
+        {
+            int temp = (int)(value * size);
+            for (int i = 0; i < size; i++) 
+            {
+                if (i < temp)
+                    Console.Write(fillerChar);
+                else
+                    Console.Write(backgroundChar);
+            }
+        }
+
+
+
 
     }
 }

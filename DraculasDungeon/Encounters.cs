@@ -40,14 +40,15 @@ namespace DraculasDungeon
 
         public static void RandomEncounter()
         {
-            switch (rand.Next(0, 2))
+            switch (rand.Next(0, 1))
             {
                 case 0:
                     BasicFightEncounter();
                     break;
-                case 1:
-                    MiniBossEncounterOne();
-                    break;
+                //case 1:
+                    //temporarily disabled the boss encounters until I change the chance they occur
+                    //MiniBossEncounterOne();
+                   // break;
             }
         }
 
@@ -111,10 +112,11 @@ namespace DraculasDungeon
                     //Run
                     if(Program.currentPlayer.currentClass != Player.PlayerClass.Rogue && rand.Next(0,2) == 0)
                     {
-                        Console.WriteLine("You trip as you try to sprint away from the " + n + " , allowing the " + n + " to land a blow");
+                        Console.WriteLine("You trip as you try to sprint away from the " + n + ", allowing the " + n + " to land a blow");
                         int damage = p - Program.currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
+                        Program.currentPlayer.health -= damage;
                         Console.WriteLine("You lose " + damage + " health");
                         Console.ReadKey();
                     } else
@@ -135,6 +137,7 @@ namespace DraculasDungeon
                         int damage = p - Program.currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
+                        Program.currentPlayer.health -= damage;
                         Console.WriteLine("While you were distracted the " + " is able to attack. You lose " + damage + " health.");
                     } else
                     {
@@ -142,10 +145,11 @@ namespace DraculasDungeon
                         int potionV = 5 + ((Program.currentPlayer.currentClass == Player.PlayerClass.Cleric)?3:0);
                         Console.WriteLine("You gain " + potionV + " health");
                         Program.currentPlayer.health += potionV;
-
+                        Program.currentPlayer.potion--;
                         int damage = (p/2) - Program.currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
+                        Program.currentPlayer.health -= damage;
                         Console.WriteLine("While you were distracted the " + n + " is able to attack. You lose " + damage + " health.");
 
                     }
@@ -162,8 +166,14 @@ namespace DraculasDungeon
                 Console.ReadKey();
             }
             int c = Program.currentPlayer.GetCoins();
-            Console.WriteLine("You stand victories over the defeated " + n + ". You find " + c + " coins on the corpse.");
+            int x = Program.currentPlayer.GetXP();
+            Console.WriteLine("You stand victories over the defeated " + n + ". You find " + c + " coins on the corpse and gain " + x + " XP.");
             Program.currentPlayer.coins += c;
+            Program.currentPlayer.xp += x;
+
+            if(Program.currentPlayer.CanLevelUp())
+                Program.currentPlayer.LevelUp();    
+
             Console.ReadKey();
         }
 

@@ -35,8 +35,6 @@ namespace DraculasDungeon
                 Console.WriteLine("(E)xit Shop");
                 Console.WriteLine("(Q)uit Game");
 
-
-
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine(p.name + "'s Stats");
@@ -49,6 +47,12 @@ namespace DraculasDungeon
                 Console.WriteLine("Difficulty Level: " + p.difficulty);
                 Console.WriteLine("=============================");
 
+                Console.WriteLine("XP To Next Level:");
+                Console.Write("[");
+                Program.ProgressBar("#", " ", ((decimal)p.xp / (decimal)p.GetLevelUpValue()), 25);
+                Console.Write("]");
+
+                Console.WriteLine("\nLevel: " + p.level);
                 //wait for input
                 string input = Console.ReadLine().ToLower();
                 if (input == "p")

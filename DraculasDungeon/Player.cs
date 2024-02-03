@@ -12,6 +12,8 @@ namespace DraculasDungeon
         public int id;
         public string name;
         public int coins = 0;
+        public int level = 1;
+        public int xp = 0;
         public int health = 10;
         public int damage = 1;
         public int armorValue = 0;
@@ -44,5 +46,39 @@ namespace DraculasDungeon
             int lower = (10 * difficulty + 1);
             return Program.rand.Next(lower, upper);
         }
+
+        public int GetXP()
+        {
+            int upper = (20 * difficulty + 50);
+            int lower = (15 * difficulty + 10);
+            return Program.rand.Next(lower, upper);
+        }
+
+        public int GetLevelUpValue()
+        {
+            return 100 * level;
+        }
+
+        public bool CanLevelUp()
+        {
+            if(xp >= GetLevelUpValue())
+                return true;
+            else 
+                return false;
+        }
+
+        public void LevelUp()
+        {
+            while (CanLevelUp())
+            {
+                xp -= GetLevelUpValue();
+                level++;
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Program.Print("You have reached level " + level);
+            Console.ResetColor();
+
+        }
+
     }
 }
