@@ -35,19 +35,19 @@ namespace DraculasDungeon
         {
             Console.Clear();
             Player p = new Player();
-            Console.WriteLine("Dracula's Dungeon");
-            Console.WriteLine("Name:");
+            Print("Dracula's Dungeon");
+            Print("Name:");
             p.name = Console.ReadLine();
             p.id = i;
             Console.Clear();
-            Console.WriteLine("You awake on a cold stone floor with no memory of the recent past");
+            Print("You awake on a cold stone floor with no memory of the recent past");
             if (p.name == "")
-                Console.WriteLine("Even lack even the knowledge of your own name");
+                Print("Even lack even the knowledge of your own name");
             else
-                Console.WriteLine("You do remember your name, " + p.name);
+                Print("You do remember your name, " + p.name);
             Console.ReadKey();
             Console.Clear();
-            Console.WriteLine("You trace your hand around the floor and walls until you find a door handle, with much effort " +
+            Print("You trace your hand around the floor and walls until you find a door handle, with much effort " +
                 "you are able to push the great iron slab open. Blinded by the light that floods your senses, you make out a dark shape " +
                 "moving towards you, with what appears to be a weapon raised!");
             return p;
@@ -90,14 +90,14 @@ namespace DraculasDungeon
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Choose your save:");
+                Print("Choose your save:");
 
                 foreach (Player p in players)
                 {
-                    Console.WriteLine(p.id + ": " + p.name);
+                    Print(p.id + ": " + p.name);
                 }
                 
-                Console.WriteLine("Please input player name or id (id:# or playername). Type 'create' to start a new save.");
+                Print("Please input player name or id (id:# or playername). Type 'create' to start a new save.");
                 string[] data = Console.ReadLine().Split(':');
 
                 try
@@ -113,12 +113,12 @@ namespace DraculasDungeon
                                     return player; 
                                 }
                             }
-                            Console.WriteLine("There is no playe with that id.");
+                            Print("There is no player with that id.");
                             Console.ReadKey();
                         } 
                         else
                         {
-                            Console.WriteLine("Your id needs to be a number. Press any key to continue");
+                            Print("Your id needs to be a number. Press any key to continue");
                             Console.ReadKey();
                         }
                     }
@@ -137,19 +137,30 @@ namespace DraculasDungeon
                                 return player;
                             }
                         }
-                        Console.WriteLine("There is no player with that name.");
+                        Print("There is no player with that name.");
                         Console.ReadKey();
                     }
 
                 }
                 catch(IndexOutOfRangeException)
                 {
-                    Console.WriteLine("Your id needs to be a number. Press any key to continue");
+                    Print("Your id needs to be a number. Press any key to continue");
                     Console.ReadKey();
                 }
 
             }
             
+        }
+
+
+        public static void Print(string text, int speed = 20)
+        {
+            foreach (char c in text)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(speed);
+            }
+            Console.WriteLine();
         }
 
     }

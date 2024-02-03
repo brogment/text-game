@@ -110,7 +110,7 @@ namespace DraculasDungeon
                     //Run
                     if(rand.Next(0,2) == 0)
                     {
-                        Console.WriteLine("You trip as you try to sprint away from the " + n + " , allowing the " + " to land a blow");
+                        Console.WriteLine("You trip as you try to sprint away from the " + n + " , allowing the " + n + " to land a blow");
                         int damage = p - Program.currentPlayer.armorValue;
                         if (damage < 0)
                             damage = 0;
