@@ -179,6 +179,42 @@ namespace DraculasDungeon
 
         public static string GetName()
         {
+            if (IsChristmas())
+            {
+                switch (rand.Next(0, 9))
+                {
+                    case 0:
+                        return "Snowman";
+                        break;
+                    case 1:
+                        return "Overworked Elf";
+                        break;
+                    case 2:
+                        return "Fell Gnome";
+                        break;
+                    case 3:
+                        return "Corrupted Reindeer";
+                        break;
+                    case 4:
+                        return "Sentient Candy Cane";
+                        break;
+                    case 5:
+                        return "Spirit of Christmas";
+                        break;
+                    case 6:
+                        return "Narwal";
+                        break;
+                    case 7:
+                        return "Gremlin";
+                        break;
+                    case 8:
+                        return "Toy Soldier";
+                        break;
+                    case 9:
+                        return "Polar Bear";
+                        break;
+                }
+            }
             switch (rand.Next(0,9))
             {
                 case 0:
@@ -215,6 +251,13 @@ namespace DraculasDungeon
             return "???";
         }
 
+        public static bool IsChristmas()
+        {
+            DateTime time = DateTime.Now;
+            if(time.Month == 12 && time.Day >= 20)
+                return true;
+            return false;
+        }
 
     }
 }
