@@ -38,6 +38,26 @@ namespace DraculasDungeon
             Print("Dracula's Dungeon");
             Print("Name:");
             p.name = Console.ReadLine();
+            Print("Class: Cleric  Rogue  Warrior");
+            bool flag = false;
+            while (flag == false)
+            {
+                flag = true;
+                string input = Console.ReadLine().ToLower();
+                if (input == "cleric")
+                    p.currentClass = Player.PlayerClass.Cleric;
+                else if (input == "rogue")
+                    p.currentClass = Player.PlayerClass.Rogue;
+                else if (input == "warrior")
+                    p.currentClass = Player.PlayerClass.Warrior;
+                else
+                {
+                    Console.WriteLine("Please choose a class.");
+                    flag = false;
+                }
+
+            }
+
             p.id = i;
             Console.Clear();
             Print("You awake on a cold stone floor with no memory of the recent past");

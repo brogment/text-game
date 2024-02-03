@@ -20,6 +20,10 @@ namespace DraculasDungeon
 
         public int difficulty = 0;
 
+        public enum PlayerClass { Cleric, Rogue, Warrior };
+        public PlayerClass currentClass = PlayerClass.Warrior;
+
+
         public int GetHealth()
         {
             int upper = (2 * difficulty  + 5);

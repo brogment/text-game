@@ -88,7 +88,7 @@ namespace DraculasDungeon
                     int damage = p - Program.currentPlayer.armorValue;
                     if(damage < 0)
                         damage = 0;
-                    int attack = rand.Next(0, Program.currentPlayer.weaponValue) + rand.Next(1, 4);
+                    int attack = rand.Next(0, Program.currentPlayer.weaponValue) + rand.Next(1, 4) + ((Program.currentPlayer.currentClass == Player.PlayerClass.Warrior) ? 2 : 0);
                     Console.WriteLine("You lose " + damage + " health and deal " + attack + " damage.");
                     Program.currentPlayer.health -= damage;
                     h -= attack;
@@ -107,8 +107,9 @@ namespace DraculasDungeon
                 }
                 else if (input.ToLower() == "r" || input.ToLower() == "run")
                 {
+                    //ROGUE can always escape
                     //Run
-                    if(rand.Next(0,2) == 0)
+                    if(Program.currentPlayer.currentClass != Player.PlayerClass.Rogue && rand.Next(0,2) == 0)
                     {
                         Console.WriteLine("You trip as you try to sprint away from the " + n + " , allowing the " + n + " to land a blow");
                         int damage = p - Program.currentPlayer.armorValue;
@@ -126,6 +127,7 @@ namespace DraculasDungeon
                 }
                 else if (input.ToLower() == "h" || input.ToLower() == "heal")
                 {
+                    //CLERIC has bonus to heal
                     //Heal TODO: Make it random if you get attacked or not while healing
                     if(Program.currentPlayer.potion == 0)
                     {
@@ -137,7 +139,7 @@ namespace DraculasDungeon
                     } else
                     {
                         Console.WriteLine("You pull out a coveted potion and gulp it down in a hurry.");
-                        int potionV = 5;
+                        int potionV = 5 + ((Program.currentPlayer.currentClass == Player.PlayerClass.Cleric)?3:0);
                         Console.WriteLine("You gain " + potionV + " health");
                         Program.currentPlayer.health += potionV;
 
